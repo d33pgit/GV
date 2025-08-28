@@ -1,7 +1,9 @@
 pipeline {
-    agent any
- tools {
-        maven 'Maven 3.8.1'  // the exact name you set in Global Tool Config
+    agent {
+        docker {
+            image 'maven:3.8.1-jdk-11'  // official Maven Docker image
+            args '-v /root/.m2:/root/.m2'  // optional: persist Maven cache
+        }
     }
     
     stages {
